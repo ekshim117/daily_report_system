@@ -56,11 +56,11 @@ public class ReportView {
     /**
      * 出勤日時
      */
-    private String timeIn;
+    private String timeIn;//追加
 
     /**
      * 退勤日時
      */
-    private String timeOut;
+    private String timeOut;//追加
 
 }

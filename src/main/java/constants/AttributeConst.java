@@ -51,7 +51,9 @@ public enum AttributeConst {
     REP_ID("id"),
     REP_DATE("report_date"),
     REP_TITLE("title"),
-    REP_CONTENT("content");
+    REP_CONTENT("content"),
+    REP_TIME_IN("timeIn"),//追加
+    REP_TIME_OUT("timeOut");//追加
 
     private final String text;
     private final Integer i;
