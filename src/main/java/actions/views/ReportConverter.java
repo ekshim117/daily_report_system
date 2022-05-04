@@ -79,6 +79,8 @@ public class ReportConverter {
         r.setContent(rv.getContent());
         r.setCreatedAt(rv.getCreatedAt());
         r.setUpdatedAt(rv.getUpdatedAt());
+        r.setTimeIn(rv.getTimeIn());        //追記
+        r.setTimeOut(rv.getTimeOut());      //追記
 
     }
 
