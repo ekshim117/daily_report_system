@@ -87,24 +87,19 @@ public interface JpaConst {
     String CUS_COL_ID = "id"; //id
     String CUS_COL_CODE = "customer_code"; //顧客番号
     String CUS_COL_NAME = "customer_name"; //氏名
-    String CUS_COL_PASS = "password"; //パスワード
-    String CUS_COL_ADMIN_FLAG = "admin_flag"; //管理者権限
     String CUS_COL_CREATED_AT = "created_at"; //登録日時
     String CUS_COL_UPDATED_AT = "updated_at"; //更新日時
-    String CUS_COL_DELETE_FLAG = "delete_flag"; //削除フラグ
+
 
 
     //NamedQueryの nameとquery
-    //全ての従業員をidの降順に取得する
+    //全ての顧客をidの降順に取得する
     String Q_CUS_GET_ALL = ENTITY_CUS + ".getAll"; //name
     String Q_CUS_GET_ALL_DEF = "SELECT c FROM Customer AS c ORDER BY c.id DESC"; //query
-    //全ての従業員の件数を取得する
+    //全ての顧客の件数を取得する
     String Q_CUS_COUNT = ENTITY_CUS + ".count";
     String Q_CUS_COUNT_DEF = "SELECT COUNT(c) FROM Customer AS c";
-    //社員番号とハッシュ化済パスワードを条件に未削除の従業員を取得する
-    //String Q_CUS_GET_BY_CODE_AND_PASS = ENTITY_CUS + ".getByCodeAndPass";
-    //String Q_CUS_GET_BY_CODE_AND_PASS_DEF = "SELECT c FROM Customer AS c WHERE c.deleteFlag = 0 AND c.code = :" + JPQL_PARM_CODE + " AND c.password = :" + JPQL_PARM_PASSWORD;
-    //指定した社員番号を保持する従業員の件数を取得する
+    //指定した顧客番号を保持する顧客の件数を取得する
     String Q_CUS_COUNT_RESISTERED_BY_CODE = ENTITY_CUS + ".countRegisteredByCode";
     String Q_CUS_COUNT_RESISTERED_BY_CODE_DEF = "SELECT COUNT(c) FROM Customer AS c WHERE c.code = :" + JPQL_PARM_CODE;
 

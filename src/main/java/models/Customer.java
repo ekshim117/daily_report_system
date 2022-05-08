@@ -32,9 +32,7 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_CUS_COUNT_RESISTERED_BY_CODE,
             query = JpaConst.Q_CUS_COUNT_RESISTERED_BY_CODE_DEF),
-    /*@NamedQuery(
-            name = JpaConst.Q_CUS_GET_BY_CODE_AND_PASS,
-            query = JpaConst.Q_CUS_GET_BY_CODE_AND_PASS_DEF)*/
+
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
@@ -54,7 +52,7 @@ public class Customer {
     private Integer id;
 
     /**
-     * 社員番号
+     * 顧客番号
      */
     @Column(name = JpaConst.CUS_COL_CODE, nullable = false, unique = true)
     private String code;
@@ -66,16 +64,10 @@ public class Customer {
     private String name;
 
     /**
-     * パスワード
+     * 表示順  全ての顧客をidの降順に取得する
      */
-    /*@Column(name = JpaConst.CUS_COL_PASS, length = 64, nullable = false)
-    private String password;
-
-    /**
-     * 管理者権限があるかどうか（一般：0、管理者：1）
-     */
-    //@Column(name = JpaConst.EMP_COL_ADMIN_FLAG, nullable = false)
-    //private Integer adminFlag;
+    @Column(name = JpaConst.Q_CUS_GET_ALL, nullable = false)
+    private String list;
 
     /**
      *登録日時
@@ -89,11 +81,7 @@ public class Customer {
     @Column(name = JpaConst.CUS_COL_UPDATED_AT, nullable = false)
     private LocalDateTime updatedAt;
 
-    /**
-     * 削除された従業員かどうか（現役：0、削除済み：1）
-     */
-    @Column(name = JpaConst.CUS_COL_DELETE_FLAG, nullable = false)
-    private Integer deleteFlag;
+
 
 
 }
