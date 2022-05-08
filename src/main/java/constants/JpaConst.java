@@ -87,6 +87,7 @@ public interface JpaConst {
     String CUS_COL_ID = "id"; //id
     String CUS_COL_CODE = "customer_code"; //顧客番号
     String CUS_COL_NAME = "customer_name"; //氏名
+    String CUS_COL_SORT = "sort";//表示順
     String CUS_COL_CREATED_AT = "created_at"; //登録日時
     String CUS_COL_UPDATED_AT = "updated_at"; //更新日時
 

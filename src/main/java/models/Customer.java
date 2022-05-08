@@ -66,8 +66,8 @@ public class Customer {
     /**
      * 表示順  全ての顧客をidの降順に取得する
      */
-    @Column(name = JpaConst.Q_CUS_GET_ALL, nullable = false)
-    private String list;
+    @Column(name = JpaConst.CUS_COL_SORT, nullable = false)
+    private String sort;
 
     /**
      *登録日時
