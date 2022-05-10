@@ -49,7 +49,7 @@ public class CustomerConverter {
      * @param c Customerのリスト
      * @return CustomerViewのリスト
      */
-    public static List<CustomerView> toVIewList(List<Customer> list){
+    public static List<CustomerView> toViewList(List<Customer> list){
         List<CustomerView> cvs = new ArrayList<>();
         for (Customer c : list) {
             cvs.add(toView(c));

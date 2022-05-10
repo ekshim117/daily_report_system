@@ -91,6 +91,9 @@ public interface JpaConst {
     String CUS_COL_CREATED_AT = "created_at"; //登録日時
     String CUS_COL_UPDATED_AT = "updated_at"; //更新日時
 
+    int CUS_DEL_TRUE = 1; //削除フラグON(削除済み)
+    int CUS_DEL_FALSE = 0; //削除フラグOFF(現役)
+
 
 
     //NamedQueryの nameとquery
