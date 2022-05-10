@@ -12,7 +12,7 @@ public enum ForwardConst {
     ACT_TOP("Top"),
     ACT_EMP("Employee"),
     ACT_REP("Report"),
-    ACT_CUS("customer"),
+    ACT_CUS("Customer"),
     ACT_AUTH("Auth"),
 
     //command
@@ -41,10 +41,10 @@ public enum ForwardConst {
     FW_REP_SHOW("reports/show"),
     FW_REP_NEW("reports/new"),
     FW_REP_EDIT("reports/edit"),
-    FW_CUS_INDEX("customer/index"),
-    FW_CUS_SHOW("customer/show"),
-    FW_CUS_EDIT("customer/edit"),
-    FW_CUS_NEW("customer/new");
+    FW_CUS_INDEX("customers/index"),
+    FW_CUS_SHOW("customers/show"),
+    FW_CUS_EDIT("customers/edit"),
+    FW_CUS_NEW("customers/new");
 
     /**
      * 文字列
