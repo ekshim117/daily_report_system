@@ -21,12 +21,14 @@
                 <tr>
                     <th>顧客番号</th>
                     <th>氏名</th>
+                    <th>表示順</th>
                     <th>操作</th>
                 </tr>
                 <c:forEach var="customer" items="${customers}" varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td><c:out value="${customer.code}" /></td>
                         <td><c:out value="${customer.name}" /></td>
+                        <td><c:out value="${customer.sort}" /></td>
                         <td>
                                     <a href="<c:url value='?action=${actCus}&command=${commShow}&id=${customer.id}' />">詳細を見る</a>
                         </td>

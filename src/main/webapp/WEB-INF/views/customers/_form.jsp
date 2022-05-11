@@ -23,6 +23,10 @@
 <input type="text" name="${AttributeConst.CUS_NAME.getValue()}" value="${customer.name}" />
 <br /><br />
 
+<label for="${AttributeConst.CUS_SORT.getValue()}">表示順</label><br />
+<input type="text" name="${AttributeConst.CUS_SORT.getValue()}" value="${customer.sort}" />
+<br /><br />
+
 <br /><br />
 <input type="hidden" name="${AttributeConst.CUS_ID.getValue()}" value="${customer.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />

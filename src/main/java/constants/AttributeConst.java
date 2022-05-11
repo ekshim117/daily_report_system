@@ -61,7 +61,8 @@ public enum AttributeConst {
     CUS_COUNT("customers_count"),
     CUS_ID("id"),
     CUS_CODE("customer_code"),
-    CUS_NAME("customer_name");
+    CUS_NAME("customer_name"),
+    CUS_SORT("customer_sort");
 
     private final String text;
     private final Integer i;

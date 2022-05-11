@@ -47,7 +47,7 @@ public class CustomerService extends ServiceBase {
 
     /**
      * 顧客番号を条件に該当するデータの件数を取得し、返却する
-     * @param code 社員番号
+     * @param code 顧客番号
      * @return 該当するデータの件数
      */
     public long countByCode(String code) {
@@ -89,16 +89,16 @@ public class CustomerService extends ServiceBase {
      */
 
    public List<String> update(CustomerView cv, String pepper){
-       //idを条件に登録済みの従業員情報を取得する
+       //idを条件に登録済みの顧客情報を取得する
        CustomerView savedCus = findOne(cv.getId());
 
        boolean validateCode = false;
        if (!savedCus.getCode().equals(cv.getCode())) {
-           //社員番号を更新する場合
+           //顧客番号を更新する場合
 
-           //社員番号についてのバリデーションを行う
+           //顧客番号についてのバリデーションを行う
            validateCode = true;
-           //変更後の社員番号を設定する
+           //変更後の顧客番号を設定する
            savedCus.setCode(cv.getCode());
        }
 
@@ -145,8 +145,8 @@ public class CustomerService extends ServiceBase {
 
    }
    /**
-    * 社員番号とパスワードを条件に検索し、データが取得できるかどうかで認証結果を返却する
-    * @param code 社員番号
+    * 顧客番号とパスワードを条件に検索し、データが取得できるかどうかで認証結果を返却する
+    * @param code 顧客番号
     * @param plainPass パスワード
     * @param pepper pepper文字列
     * @return 認証結果を返却す(成功:true 失敗:false)
@@ -168,7 +168,7 @@ public class CustomerService extends ServiceBase {
        return isValidCustomer;
    }
    /**
-    * idを条件にデータを1件取得し、Employeeのインスタンスで返却する
+    * idを条件にデータを1件取得し、Customerのインスタンスで返却する
     * @param id
     * @return 取得データのインスタンス
     */
@@ -179,8 +179,8 @@ public class CustomerService extends ServiceBase {
    }
 
    /**
-    * 従業員データを1件登録する
-    * @param ev 従業員データ
+    * 顧客データを1件登録する
+    * @param cv 顧客データ
     * @return 登録結果(成功:true 失敗:false)
     */
    private void create(CustomerView cv) {
@@ -192,8 +192,8 @@ public class CustomerService extends ServiceBase {
    }
 
    /**
-    * 従業員データを更新する
-    * @param ev 画面から入力された従業員の登録内容
+    * 顧客データを更新する
+    * @param cv 画面から入力された顧客の登録内容
     */
    private void update(CustomerView cv) {
 
