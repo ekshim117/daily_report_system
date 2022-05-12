@@ -75,8 +75,18 @@ public class CustomerService extends ServiceBase {
         cv.setCreatedAt(now);
         cv.setUpdatedAt(now);
 
+      //登録内容のバリデーションを行う
+        List<String> errors = CustomerValidator.validate(this, cv, true, true);
 
-        return null;
+        //バリデーションエラーがなければデータを登録する
+        if (errors.size() == 0) {
+            create(cv);
+        }
+
+        //エラーを返却（エラーがなければ0件の空リスト）
+
+
+        return errors;
 
 
     }
