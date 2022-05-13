@@ -25,8 +25,8 @@ public class ReportConverter {
                 rv.getCreatedAt(),
                 rv.getUpdatedAt(),
                 rv.getTimeIn(),
-                rv.getTimeOut());
-                //rv.getCustomerId())
+                rv.getTimeOut(),
+                rv.getCustomerId());
 
     }
 
@@ -50,8 +50,8 @@ public class ReportConverter {
                 r.getCreatedAt(),
                 r.getUpdatedAt(),
                 r.getTimeIn(),
-                r.getTimeOut()
-                //r.getCustomerId()
+                r.getTimeOut(),
+                r.getCustomerId()
                 );
     }
 

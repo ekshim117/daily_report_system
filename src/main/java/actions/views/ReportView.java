@@ -66,7 +66,7 @@ public class ReportView {
     /**
      * 顧客ID
      */
-    //private Integer customerId;//追加
+    private Integer customerId;//追加
 
 
 }

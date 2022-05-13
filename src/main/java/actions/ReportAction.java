@@ -115,7 +115,8 @@ public class ReportAction extends ActionBase {
                     null,
                     null,
                     getRequestParam(AttributeConst.REP_TIME_IN),
-                    getRequestParam(AttributeConst.REP_TIME_OUT)
+                    getRequestParam(AttributeConst.REP_TIME_OUT),
+                    null
                     );
 
             //日報情報登録
