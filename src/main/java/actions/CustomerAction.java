@@ -147,6 +147,30 @@ public class CustomerAction extends ActionBase {
         forward(ForwardConst.FW_CUS_SHOW);
 
     }
+    /**
+     * 編集画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void edit() throws ServletException, IOException {
+
+        //idを条件に従業員データを取得する
+        CustomerView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CUS_ID)));
+
+        if (cv == null) {
+
+            //データが取得できなかった、または論理削除されている場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+            return;
+        }
+
+        putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+        putRequestScope(AttributeConst.EMPLOYEE, cv); //取得した従業員情報
+
+        //編集画面を表示する
+        forward(ForwardConst.FW_CUS_EDIT);
+
+    }
 
 
 }
