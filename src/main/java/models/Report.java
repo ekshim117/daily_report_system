@@ -107,6 +107,9 @@ public class Report {
     @Column(name = JpaConst.REP_COL_TIME_OUT, nullable = false)
     private String timeOut;
 
+    //@Column(name = JpaConst.REP_COL_CUS_ID, nullable = false)
+    //private Integer customerId;
+
 
 
 

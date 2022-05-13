@@ -54,6 +54,7 @@ public enum AttributeConst {
     REP_CONTENT("content"),
     REP_TIME_IN("timeIn"),//追加
     REP_TIME_OUT("timeOut"),
+    REP_CUS_ID("customerId"),
 
     //顧客管理*追加
     CUSTOMER("customer"),

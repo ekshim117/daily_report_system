@@ -63,4 +63,10 @@ public class ReportView {
      */
     private String timeOut;//追加
 
+    /**
+     * 顧客ID
+     */
+    //private Integer customerId;//追加
+
+
 }
