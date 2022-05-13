@@ -165,11 +165,57 @@ public class CustomerAction extends ActionBase {
         }
 
         putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
-        putRequestScope(AttributeConst.EMPLOYEE, cv); //取得した従業員情報
+        putRequestScope(AttributeConst.CUSTOMER, cv); //取得した従業員情報
 
         //編集画面を表示する
         forward(ForwardConst.FW_CUS_EDIT);
 
+    }
+
+    /**
+     * 更新を行う
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void update() throws ServletException, IOException {
+
+        //CSRF対策 tokenのチェック
+        if (checkToken()) {
+            //パラメータの値を元に従業員情報のインスタンスを作成する
+            CustomerView cv = new CustomerView(
+                    toNumber(getRequestParam(AttributeConst.CUS_ID)),
+                    getRequestParam(AttributeConst.CUS_CODE),
+                    getRequestParam(AttributeConst.CUS_NAME),
+                    getRequestParam(AttributeConst.CUS_SORT),
+
+                    null, null);
+
+
+            //アプリケーションスコープからpepper文字列を取得
+            String pepper = getContextScope(PropertyConst.PEPPER);
+
+            //顧客情報更新
+            List<String> errors = service.update(cv, pepper);
+
+            if (errors.size() > 0) {
+                //更新中にエラーが発生した場合
+
+                putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+                putRequestScope(AttributeConst.CUSTOMER, cv); //入力された顧客情報
+                putRequestScope(AttributeConst.ERR, errors); //エラーのリスト
+
+                //編集画面を再表示
+                forward(ForwardConst.FW_CUS_EDIT);
+            } else {
+                //更新中にエラーがなかった場合
+
+                //セッションに更新完了のフラッシュメッセージを設定
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
+
+                //一覧画面にリダイレクト
+                redirect(ForwardConst.ACT_CUS, ForwardConst.CMD_INDEX);
+            }
+        }
     }
 
 

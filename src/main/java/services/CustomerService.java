@@ -112,7 +112,17 @@ public class CustomerService extends ServiceBase {
            savedCus.setCode(cv.getCode());
        }
 
-       boolean validatePass = false;
+       boolean validateSort = false;
+       if (!savedCus.getSort().equals(cv.getSort())) {
+           //表示順を更新する場合
+
+           //表示順についてのバリデーションを行う
+           validateCode = true;
+           //変更後の表示順を設定する
+           savedCus.setCode(cv.getSort());
+       }
+
+
 
 
        savedCus.setName(cv.getName()); //変更後の氏名を設定する
@@ -123,7 +133,7 @@ public class CustomerService extends ServiceBase {
        savedCus.setUpdatedAt(today);
 
        //更新内容についてバリデーションを行う
-       List<String> errors = CustomerValidator.validate(this, savedCus, validateCode, validatePass);
+       List<String> errors = CustomerValidator.validate(this, savedCus, validateCode, validateSort);
 
        //バリデーションエラーがなければデータを更新する
        if (errors.size() == 0) {
