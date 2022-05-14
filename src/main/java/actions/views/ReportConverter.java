@@ -26,7 +26,10 @@ public class ReportConverter {
                 rv.getUpdatedAt(),
                 rv.getTimeIn(),
                 rv.getTimeOut(),
-                rv.getCustomerId());
+                rv.getCustomerId(),
+                rv.getCustomerName(),
+                rv.getCustomerSort()
+                );
 
     }
 
@@ -51,7 +54,9 @@ public class ReportConverter {
                 r.getUpdatedAt(),
                 r.getTimeIn(),
                 r.getTimeOut(),
-                r.getCustomerId()
+                r.getCustomerId(),
+                r.getCustomerName(),
+                r.getCustomerSort()
                 );
     }
 
@@ -84,9 +89,9 @@ public class ReportConverter {
         r.setCreatedAt(rv.getCreatedAt());
         r.setUpdatedAt(rv.getUpdatedAt());
         r.setTimeIn(rv.getTimeIn());        //追記
-        r.setTimeOut(rv.getTimeOut());      //追記
-        //r.setCustomerId(rv.getCustomerId()
-                ;
+        r.setTimeOut(rv.getTimeOut());     //追記
+        r.setCustomerId(rv.getCustomerId()
+                );
 
     }
 

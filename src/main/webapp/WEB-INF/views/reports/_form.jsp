@@ -38,12 +38,12 @@
 <br /><br />
 
 <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-  <option selected>Open this select menu</option>
+  <option selected>得意先</option>
   <option value="1">One</option>
   <option value="2">Two</option>
   <option value="3">Three</option>
 </select>
-
+<br /><br />
 
 
 <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />

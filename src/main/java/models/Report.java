@@ -108,7 +108,13 @@ public class Report {
     private String timeOut;
 
     @Column(name = JpaConst.REP_COL_CUS_ID, nullable = false)
-    private Integer customerId;
+    private String customerId;
+
+    @Column(name = JpaConst.REP_COL_CUS_NAME, nullable = false)
+    private String customerName;
+
+    @Column(name = JpaConst.REP_COL_CUS_SORT, nullable = false)
+    private String customerSort;
 
 
 
