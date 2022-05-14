@@ -37,11 +37,11 @@
 <input type="text" name="${AttributeConst.REP_TIME_OUT.getValue()}" value="${report.timeOut}" />
 <br /><br />
 
-<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-  <option selected>得意先</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
+<select name="${AttributeConst.REP_CUS_NAME.getValue()}">
+  <option selected>顧客名</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
 </select>
 <br /><br />
 

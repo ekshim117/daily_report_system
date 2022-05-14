@@ -43,8 +43,8 @@ public interface JpaConst {
     String REP_COL_TIME_IN = "time_in"; //出勤日時 *追加コンテンツ
     String REP_COL_TIME_OUT = "time_out"; //退勤日時 *追加コンテンツ
     String REP_COL_CUS_ID = "customer_id";//顧客のID
-    String REP_COL_CUS_NAME = "customer_name";//顧客のID
-    String REP_COL_CUS_SORT = "customer_sort";//顧客のID
+    String REP_COL_CUS_NAME = "customer_name";//顧客名
+    String REP_COL_CUS_SORT = "customer_sort";//顧客表示順
 
     //Entity名
     String ENTITY_EMP = "employee"; //従業員
@@ -83,6 +83,7 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
     //顧客テーブルと日報テーブルを結合
+
 
 
 
