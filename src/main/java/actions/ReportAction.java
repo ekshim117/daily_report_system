@@ -205,6 +205,11 @@ public class ReportAction extends ActionBase {
             putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
             putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
 
+          //顧客登録用のリストを取得
+            List<CustomerView> customers = customerService.getAll();
+            putRequestScope(AttributeConst.CUSTOMER_LIST, customers);//顧客リスト
+
+
             //編集画面を表示
             forward(ForwardConst.FW_REP_EDIT);
         }

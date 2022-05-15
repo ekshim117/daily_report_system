@@ -34,6 +34,16 @@ public class CustomerService extends ServiceBase {
 
         return cusCount;
     }
+    /**
+     * 顧客テーブルのデータの件数を取得し、返却する
+     * @return 顧客テーブルのデータの件数
+     */
+    public List<CustomerView> getAll() {
+        List<Customer> customers = em.createNamedQuery(JpaConst.Q_CUS_GET_ALL, Customer.class)
+                .getResultList();
+
+        return CustomerConverter.toViewList(customers);
+    }
 
     /**
      * idを条件に取得したデータをCustomerViewのインスタンスで返却する
@@ -65,7 +75,7 @@ public class CustomerService extends ServiceBase {
      * @param pepper pepper文字列
      * @return バリデーションや登録処理中に発生したエラーのリスト
      */
-    public List<String> create(CustomerView cv, String pepper) {
+    public List<String> create(CustomerView cv) {
 
 
 
@@ -80,7 +90,7 @@ public class CustomerService extends ServiceBase {
 
         //バリデーションエラーがなければデータを登録する
         if (errors.size() == 0) {
-            create(cv);
+            createInternal(cv);
         }
 
         //エラーを返却（エラーがなければ0件の空リスト）
@@ -94,11 +104,10 @@ public class CustomerService extends ServiceBase {
     /**
      * 画面から入力された顧客の登録内容を元にデータを1件作成し、顧客テーブルに更新する
      * @param cv 画面から入力された顧客の登録内容
-     * @param pepper pepper文字列
      * @return バリデーションや登録処理中に発生したエラーのリスト
      */
 
-   public List<String> update(CustomerView cv, String pepper){
+   public List<String> update(CustomerView cv){
        //idを条件に登録済みの顧客情報を取得する
        CustomerView savedCus = findOne(cv.getId());
 
@@ -137,7 +146,7 @@ public class CustomerService extends ServiceBase {
 
        //バリデーションエラーがなければデータを更新する
        if (errors.size() == 0) {
-           update(savedCus);
+           updateInternal(savedCus);
        }
 
        //エラーを返却（エラーがなければ0件の空リスト）
@@ -161,32 +170,11 @@ public class CustomerService extends ServiceBase {
        //savedCus.setDeleteFlag(JpaConst.CUS_DEL_TRUE);
 
        //更新処理を行う
-       update(savedCus, null);
+       update(savedCus);
 
    }
-   /**
-    * 顧客番号とパスワードを条件に検索し、データが取得できるかどうかで認証結果を返却する
-    * @param code 顧客番号
-    * @param plainPass パスワード
-    * @param pepper pepper文字列
-    * @return 認証結果を返却す(成功:true 失敗:false)
-    */
-   public Boolean validateLogin(String code, String plainPass, String pepper) {
 
-       boolean isValidCustomer = false;
-       /*if (code != null && !code.equals("") && plainPass != null && !plainPass.equals("")) {
-           CustomerView cv = findOne(code, plainPass, pepper);
 
-           if (cv != null && cv.getId() != null) {
-
-               //データが取得できた場合、認証成功
-               isValidCustomer = true;
-           }
-       }*/
-
-       //認証結果を返却する
-       return isValidCustomer;
-   }
    /**
     * idを条件にデータを1件取得し、Customerのインスタンスで返却する
     * @param id
@@ -203,7 +191,7 @@ public class CustomerService extends ServiceBase {
     * @param cv 顧客データ
     * @return 登録結果(成功:true 失敗:false)
     */
-   private void create(CustomerView cv) {
+   private void createInternal(CustomerView cv) {
 
        em.getTransaction().begin();
        em.persist(CustomerConverter.toModel(cv));
@@ -215,7 +203,7 @@ public class CustomerService extends ServiceBase {
     * 顧客データを更新する
     * @param cv 画面から入力された顧客の登録内容
     */
-   private void update(CustomerView cv) {
+   private void updateInternal(CustomerView cv) {
 
        em.getTransaction().begin();
        Customer c = findOneInternal(cv.getId());
