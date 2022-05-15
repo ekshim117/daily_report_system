@@ -32,6 +32,13 @@ public class ReportValidator {
             errors.add(contentError);
         }
 
+        //顧客のチェック
+        String customerError = validateContent(rv.getContent());
+        if(!contentError.equals("")) {
+            errors.add(customerError);
+
+        }
+
         return errors;
     }
 

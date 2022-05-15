@@ -64,19 +64,11 @@ public class ReportView {
     private String timeOut;//追加
 
     /**
-     * 顧客ID
+     * 顧客情報
      */
-    private String customerId;//追加
+    private CustomerView customer;
 
-    /**
-     * 顧客ID
-     */
-    private String customerName;//追加
 
-    /**
-     * 顧客ID
-     */
-    private String customerSort;//追加
 
 
 }
