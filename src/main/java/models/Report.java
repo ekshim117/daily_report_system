@@ -107,15 +107,12 @@ public class Report {
     @Column(name = JpaConst.REP_COL_TIME_OUT, nullable = false)
     private String timeOut;
 
-    @Column(name = JpaConst.REP_COL_CUS_ID, nullable = false)
-    private String customerId;
-
-    @Column(name = JpaConst.REP_COL_CUS_NAME, nullable = false)
-    private String customerName;
-
-    @Column(name = JpaConst.REP_COL_CUS_SORT, nullable = false)
-    private String customerSort;
-
+    /**
+     * 顧客
+     */
+    @ManyToOne
+    @JoinColumn(name = JpaConst.REP_COL_CUS, nullable = false)
+    private Customer customer;
 
 
 

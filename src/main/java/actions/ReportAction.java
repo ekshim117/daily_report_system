@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import actions.views.CustomerView;
 import actions.views.EmployeeView;
 import actions.views.ReportView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import services.CustomerService;
 import services.ReportService;
 
 /**
@@ -22,6 +24,7 @@ import services.ReportService;
 public class ReportAction extends ActionBase {
 
     private ReportService service;
+    private CustomerService customerService;
 
     /**
      * メソッドを実行する
@@ -31,9 +34,13 @@ public class ReportAction extends ActionBase {
 
         service = new ReportService();
 
+        customerService = new CustomerService();
+
         //メソッドを実行
         invoke();
+
         service.close();
+        customerService.close();
     }
 
     /**
@@ -79,6 +86,10 @@ public class ReportAction extends ActionBase {
         rv.setReportDate(LocalDate.now());
         putRequestScope(AttributeConst.REPORT, rv); //日付のみ設定済みの日報インスタンス
 
+        //顧客名選択用のリストを取得
+        List<CustomerView>customers = customerService.getAll();
+        putRequestScope(AttributeConst.CUSTOMER_LIST, customers);//顧客リスト
+
         //新規登録画面を表示
         forward(ForwardConst.FW_REP_NEW);
 
@@ -105,6 +116,8 @@ public class ReportAction extends ActionBase {
             //セッションからログイン中の従業員情報を取得
             EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
+            CustomerView customer = customerService.findOne(toNumber(getRequestParam(AttributeConst.REP_CUS))) ;
+
             //パラメータの値をもとに日報情報のインスタンスを作成する
             ReportView rv = new ReportView(
                     null,
@@ -116,10 +129,7 @@ public class ReportAction extends ActionBase {
                     null,
                     getRequestParam(AttributeConst.REP_TIME_IN),
                     getRequestParam(AttributeConst.REP_TIME_OUT),
-                    getRequestParam(AttributeConst.REP_CUS_ID),
-                    getRequestParam(AttributeConst.REP_CUS_NAME),
-                    getRequestParam(AttributeConst.REP_CUS_SORT)
-
+                    customer
                     );
 
             //日報情報登録
@@ -131,6 +141,10 @@ public class ReportAction extends ActionBase {
                 putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
                 putRequestScope(AttributeConst.REPORT, rv);//入力された日報情報
                 putRequestScope(AttributeConst.ERR, errors);//エラーのリスト
+
+                //顧客登録用のリストを取得
+                List<CustomerView> customers = customerService.getAll();
+                putRequestScope(AttributeConst.CUSTOMER_LIST, customers);//顧客リスト
 
                 //新規登録画面を再表示
                 forward(ForwardConst.FW_REP_NEW);
@@ -209,15 +223,16 @@ public class ReportAction extends ActionBase {
             //idを条件に日報データを取得する
             ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
+            CustomerView customer = customerService.findOne(toNumber(getRequestParam(AttributeConst.REP_CUS))) ;
+
             //入力された日報内容を設定する
             rv.setReportDate(toLocalDate(getRequestParam(AttributeConst.REP_DATE)));
             rv.setTitle(getRequestParam(AttributeConst.REP_TITLE));
             rv.setContent(getRequestParam(AttributeConst.REP_CONTENT));
             rv.setTimeIn(getRequestParam(AttributeConst.REP_TIME_IN));//追加
             rv.setTimeOut(getRequestParam(AttributeConst.REP_TIME_OUT));//追加
-            rv.setCustomerId(getRequestParam(AttributeConst.REP_CUS_ID));
-            rv.setCustomerName(getRequestParam(AttributeConst.REP_CUS_NAME));
-            rv.setCustomerSort(getRequestParam(AttributeConst.REP_CUS_SORT));
+            rv.setCustomer(customer);
+
 
             //日報データを更新する
             List<String> errors = service.update(rv);
@@ -228,6 +243,10 @@ public class ReportAction extends ActionBase {
                 putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
                 putRequestScope(AttributeConst.REPORT, rv); //入力された日報情報
                 putRequestScope(AttributeConst.ERR, errors); //エラーのリスト
+
+                //顧客名選択用のリストを取得
+                List<CustomerView> customers = customerService.getAll();
+                putRequestScope(AttributeConst.CUSTOMER_LIST, customers); // 顧客リスト
 
                 //編集画面を再表示
                 forward(ForwardConst.FW_REP_EDIT);

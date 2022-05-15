@@ -37,11 +37,13 @@
 <input type="text" name="${AttributeConst.REP_TIME_OUT.getValue()}" value="${report.timeOut}" />
 <br /><br />
 
-<select name="${AttributeConst.REP_CUS_NAME.getValue()}">
-  <option selected>顧客名</option>
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
+<label for="${AttributeConst.REP_CUS.getValue()}">顧客名</label><br />
+<select name="${AttributeConst.REP_CUS.getValue()}">
+    <c:forEach var="customer" items="${customer_list}" varStatus="status">
+        <option value= "${customer.id }" <c:if test="${customer.id == report.customer.id}">selected</c:if>>
+            <c:out value="${customer.name}"/>
+        </option>
+    </c:forEach>
 </select>
 <br /><br />
 
