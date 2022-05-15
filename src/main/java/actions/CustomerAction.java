@@ -10,7 +10,6 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
-import constants.PropertyConst;
 import services.CustomerService;
 
 public class CustomerAction extends ActionBase {
@@ -70,7 +69,7 @@ public class CustomerAction extends ActionBase {
     public void entryNew() throws ServletException, IOException {
 
         putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
-        putRequestScope(AttributeConst.CUSTOMER, new CustomerView()); //空の従業員インスタンス
+        putRequestScope(AttributeConst.CUSTOMER, new CustomerView()); //空の顧客インスタンス
 
         //新規登録画面を表示
         forward(ForwardConst.FW_CUS_NEW);
@@ -86,7 +85,7 @@ public class CustomerAction extends ActionBase {
         //CSRF対策 tokenのチェック
         if (checkToken()) {
 
-            //パラメータの値を元に従業員情報のインスタンスを作成する
+            //パラメータの値を元に顧客情報のインスタンスを作成する
             CustomerView cv = new CustomerView(
                     null,
                     getRequestParam(AttributeConst.CUS_CODE),
@@ -96,16 +95,16 @@ public class CustomerAction extends ActionBase {
                     null);
 
             //アプリケーションスコープからpepper文字列を取得
-            String pepper = getContextScope(PropertyConst.PEPPER);
+            //String pepper = getContextScope(PropertyConst.PEPPER);
 
-            //従業員情報登録
-            List<String> errors = service.create(cv, pepper);
+            //顧客情報登録
+            List<String> errors = service.create(cv);
 
             if (errors.size() > 0) {
                 //登録中にエラーがあった場合
 
                 putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
-                putRequestScope(AttributeConst.CUSTOMER, cv); //入力された従業員情報
+                putRequestScope(AttributeConst.CUSTOMER, cv); //入力された顧客情報
                 putRequestScope(AttributeConst.ERR, errors); //エラーのリスト
 
                 //新規登録画面を再表示
@@ -131,7 +130,7 @@ public class CustomerAction extends ActionBase {
      */
     public void show() throws ServletException, IOException{
 
-        //idを条件に従業員データを取得する
+        //idを条件に顧客データを取得する
         CustomerView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CUS_ID)));
 
         if (cv == null ) {
@@ -141,7 +140,7 @@ public class CustomerAction extends ActionBase {
             return;
         }
 
-        putRequestScope(AttributeConst.CUSTOMER, cv); //取得した従業員情報
+        putRequestScope(AttributeConst.CUSTOMER, cv); //取得した顧客情報
 
         //詳細画面を表示
         forward(ForwardConst.FW_CUS_SHOW);
@@ -154,7 +153,7 @@ public class CustomerAction extends ActionBase {
      */
     public void edit() throws ServletException, IOException {
 
-        //idを条件に従業員データを取得する
+        //idを条件に顧客データを取得する
         CustomerView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CUS_ID)));
 
         if (cv == null) {
@@ -165,7 +164,7 @@ public class CustomerAction extends ActionBase {
         }
 
         putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
-        putRequestScope(AttributeConst.CUSTOMER, cv); //取得した従業員情報
+        putRequestScope(AttributeConst.CUSTOMER, cv); //取得した顧客情報
 
         //編集画面を表示する
         forward(ForwardConst.FW_CUS_EDIT);
@@ -181,7 +180,7 @@ public class CustomerAction extends ActionBase {
 
         //CSRF対策 tokenのチェック
         if (checkToken()) {
-            //パラメータの値を元に従業員情報のインスタンスを作成する
+            //パラメータの値を元に顧客情報のインスタンスを作成する
             CustomerView cv = new CustomerView(
                     toNumber(getRequestParam(AttributeConst.CUS_ID)),
                     getRequestParam(AttributeConst.CUS_CODE),
@@ -192,10 +191,10 @@ public class CustomerAction extends ActionBase {
 
 
             //アプリケーションスコープからpepper文字列を取得
-            String pepper = getContextScope(PropertyConst.PEPPER);
+            //String pepper = getContextScope(PropertyConst.PEPPER);
 
             //顧客情報更新
-            List<String> errors = service.update(cv, pepper);
+            List<String> errors = service.update(cv);
 
             if (errors.size() > 0) {
                 //更新中にエラーが発生した場合

@@ -27,7 +27,7 @@ public class CustomerView {
     private String code;
 
     /**
-     * 氏名
+     * 顧客名
      */
     private String name;
 
